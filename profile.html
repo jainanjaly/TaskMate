@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskMate | Profile</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>User Profile</h1>
+    </header>
+    <main>
+        <section class="profile-container">
+            <div class="profile-info">
+                <h2>Personal Information</h2>
+                <p><strong>Name:</strong> John Doe</p> <!-- Dynamically populate this -->
+                <p><strong>Email:</strong> john.doe@example.com</p>
+                <p><strong>Location:</strong> New York, NY</p>
+                <p><strong>Reputation Score:</strong> 4.7</p>
+                <button onclick="editProfile()">Edit Profile</button>
+            </div>
+
+            <div class="profile-stats">
+                <h2>Task Statistics</h2>
+                <p><strong>Tasks Given:</strong> 5</p>
+                <p><strong>Tasks Completed:</strong> 8</p>
+                <p><strong>Total Earnings:</strong> $300</p>
+                <p><strong>Average Rating:</strong> 4.8</p>
+            </div>
+        </section>
+
+        <section class="task-history">
+            <h2>Task History</h2>
+            <div class="task-entry">
+                <h3>Task: Babysit for 4 hours</h3>
+                <p><strong>Status:</strong> Completed</p>
+                <p><strong>Rating:</strong> 5.0</p>
+                <p><strong>Feedback:</strong> "Great job, very professional!"</p>
+            </div>
+            <!-- Additional task entries go here -->
+        </section>
+    </main>
+    <script>
+        function editProfile() {
+            window.location.href = 'edit_profile.html'; // Navigate to the profile edit page (if implemented)
+        }
+    </script>
+</body>
+</html>

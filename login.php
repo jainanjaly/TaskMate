@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'config.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -10,16 +11,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
+        print_r($user);
         if (password_verify($password, $user['password'])) {
-            session_start();
-            $_SESSION['user_id'] = $user['id'];
-            header('Location: dashboard.html');
+            setcookie("sessionid", $user['id'], time() + (86400 * 30), "/");
+            header('Location: dashboard.php');
         } else {
             echo "Invalid password!";
         }
     } else {
         echo "No account found with that email!";
     }
+    
 
     $conn->close();
 }

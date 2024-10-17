@@ -1,14 +1,23 @@
+<?php
+// session_start();
+
+if (!isset($_COOKIE['sessionid'])) {
+    // If the session doesn't exist, redirect to login page
+    header('Location: index.html');
+    // echo "hello";
+    exit();
+}
+?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html >
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TaskMate | Dashboard</title>
     <link rel="stylesheet" href="dashboard.css">
 </head>
 <body>
     <header>
-        <h1>Welcome, [User's Name]</h1>
+        <h1>Welcome,  User #<?php echo $_COOKIE['sessionid']; ?></h1>
     </header>
     <main>
         <div class="dashboard-container">

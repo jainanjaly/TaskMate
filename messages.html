@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskMate | Messages</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Your Messages</h1>
+    </header>
+    <main>
+        <section class="message-container">
+            <h2>Conversation with Sarah</h2> <!-- Dynamically load conversation data -->
+            <div class="message-history">
+                <div class="message">
+                    <p><strong>You:</strong> Hi Sarah, are you still available to babysit tomorrow?</p>
+                    <p class="timestamp">Sent: Oct 14, 2024, 10:15 AM</p>
+                </div>
+                <div class="message">
+                    <p><strong>Sarah:</strong> Yes, I'm available. What time should I come?</p>
+                    <p class="timestamp">Sent: Oct 14, 2024, 10:20 AM</p>
+                </div>
+            </div>
+            <form action="send_message.php" method="POST">
+                <input type="hidden" name="receiver_id" value="2"> <!-- User ID of the receiver -->
+                <textarea name="message_content" placeholder="Type your message here..." required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
+        
+        <section class="message-list">
+            <h2>Recent Conversations</h2>
+            <ul>
+                <li><a href="messages.html?user=2">Conversation with Sarah</a></li> <!-- Populate dynamically -->
+                <li><a href="messages.html?user=3">Conversation with Mike</a></li>
+                <!-- More conversations -->
+            </ul>
+        </section>
+    </main>
+</body>
+</html>

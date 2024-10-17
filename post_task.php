@@ -1,9 +1,10 @@
 <?php
+
 include 'config.php';
 
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    session_start();
-    $user_id = $_SESSION['user_id'];
+    $user_id = $_COOKIE['sessionid'];
     $title = $_POST['title'];
     $description = $_POST['description'];
     $est_time_hours = $_POST['est_time_hours'];
@@ -16,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($conn->query($sql) === TRUE) {
         echo "Task posted successfully!";
-        header('Location: browse_tasks.html');
+        header('Location: dashboard.php');
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
