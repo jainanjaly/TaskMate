@@ -1,25 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>TaskMate | Welcome</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskMate</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        body{
+        background: url('image.jpg') no-repeat center center fixed; /* Background image */
+        background-size: cover; /* Cover the entire background */
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>Welcome to TaskMate</h1>
+        <h1>TaskMate</h1>
     </header>
-    <main>
-        <div class="container">
-            <div class="form-box">
-                <h2>Login</h2>
-                <form action="login.php" method="POST">
-                    <input type="email" name="email" placeholder="Email" required>
-                    <input type="password" name="password" placeholder="Password" required>
-                    <button type="submit">Login</button>
-                </form>
-                <p>Don't have an account? <a href="signup.html">Sign up</a></p>
+    <div class="welcome-container">
+        <div class="card">
+            <img src="logo.png" alt="Logo" height="160px" width="auto">
+            <div class="button-container">
+                <div class="button-card">
+                    <a href="welcome.html">Login</a>
+                </div>
+                <div class="button-card">
+                    <a href="signup.html">SignUp</a>
+                </div>
             </div>
         </div>
-    </main>
+    </div>
+
+    <footer>
+        <p>TaskMate - Simplifying everyday chores</p>
+    </footer>
 </body>
 </html>
+

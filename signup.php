@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($conn->query($sql) === TRUE) {
         echo "Registration successful!";
-        header('Location: index.html');
+        header('Location: welcome.html');
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }

@@ -3,7 +3,7 @@
 
 if (!isset($_COOKIE['sessionid'])) {
     // If the session doesn't exist, redirect to login page
-    header('Location: index.html');
+    header('Location: welcome.html');
     // echo "hello";
     exit();
 }
@@ -24,7 +24,7 @@ if (!isset($_COOKIE['sessionid'])) {
             <h2>Your Dashboard</h2>
             <div class="dashboard-options">
                 <a href="post_task.html">Have a Chore</a>
-                <a href="browse_tasks.html">Do a Chore</a>
+                <a href="browse_tasks.php">Do a Chore</a>
                 <a href="profile.html">View Profile</a>
                 <a href="messages.html">Messages</a>
             </div>

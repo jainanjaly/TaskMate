@@ -1,25 +1,15 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const taskList = document.getElementById('task-list');
-    
-    // Example filter function (can be expanded)
-    function filterTasks(criteria) {
-        // Apply filter logic here (e.g., based on location, skills, etc.)
-    }
+document.getElementById('searchInput').addEventListener('input', function() {
+    const searchQuery = this.value.toLowerCase();
+    const taskCards = document.querySelectorAll('.task-card');
 
-    // Fetch tasks via AJAX and populate task list (example function)
-    fetch('api_get_tasks.php')
-        .then(response => response.json())
-        .then(tasks => {
-            tasks.forEach(task => {
-                const taskDiv = document.createElement('div');
-                taskDiv.classList.add('task');
-                taskDiv.innerHTML = `
-                    <h3>${task.title}</h3>
-                    <p>${task.description}</p>
-                    <p>Payment: $${task.payment}</p>
-                    <p>Location: ${task.location}</p>
-                `;
-                taskList.appendChild(taskDiv);
-            });
-        });
+    taskCards.forEach(card => {
+        const title = card.querySelector('h3').textContent.toLowerCase();
+        const description = card.querySelector('p').textContent.toLowerCase();
+
+        if (title.includes(searchQuery) || description.includes(searchQuery)) {
+            card.style.display = 'block';
+        } else {
+            card.style.display = 'none';
+        }
+    });
 });
