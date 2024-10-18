@@ -9,6 +9,14 @@ if (!isset($_COOKIE['sessionid'])) {
 }
 
 $user_id = $_COOKIE['sessionid']; // Assuming you're storing the user_id in session
+$doer_id = $_GET['doer_id']; // Assuming you're storing the
+$task_id = $_GET['task_id']; // Assuming you're storing the
+
+$sql_post = "UPDATE tasks SET doer_id = ? WHERE id = ?";
+$stmt_post = $conn->prepare($sql_post);
+$stmt_post->bind_param("ii", $doer_id, $task_id);
+$stmt_post->execute();
+$result_post = $stmt_post->get_result();
 
 // Fetch tasks posted by the user
 $sql_posted = "SELECT * FROM tasks WHERE user_id = ?";
@@ -18,9 +26,10 @@ $stmt_posted->execute();
 $result_posted = $stmt_posted->get_result();
 
 // Fetch tasks applied by the user
+
 $sql_applied = "SELECT * FROM tasks WHERE doer_id = ?";
 $stmt_applied = $conn->prepare($sql_applied);
-$stmt_applied->bind_param("i", $user_id);
+$stmt_applied->bind_param("i", $doer_id);
 $stmt_applied->execute();
 $result_applied = $stmt_applied->get_result();
 ?>
@@ -126,6 +135,7 @@ footer {
 <?php
 $stmt_posted->close(); // Close the statement
 $stmt_applied->close(); // Close the statement
+$stmt_post->close();
 $conn->close(); // Close the database connection
 ?>
 

@@ -139,7 +139,7 @@ footer {
 </head>
 <body>
     <header>
-        <h1>Welcome, User #<?php echo $_COOKIE['sessionid']; ?></h1>
+        <h1>Welcome <?php echo $_COOKIE['username']; ?></h1>
         <div class="menu">
             <div class="hamburger">&#9776;</div>
             <div class="menu-content">

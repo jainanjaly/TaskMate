@@ -14,6 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         print_r($user);
         if (password_verify($password, $user['password'])) {
             setcookie("sessionid", $user['id'], time() + (86400 * 30), "/");
+            setcookie("username", $user['first_name'], time() + (86400 * 30), "/");
             header('Location: dashboard.php');
         } else {
             echo "Invalid password!";

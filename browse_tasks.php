@@ -6,9 +6,9 @@ $locationFilter = isset($_GET['location']) ? $_GET['location'] : '';
 $paymentFilter = isset($_GET['payment']) ? floatval($_GET['payment']) : 0;
 $deadlineFilter = isset($_GET['deadline']) ? $_GET['deadline'] : '';
 $sortOption = isset($_GET['sort']) ? $_GET['sort'] : 'default';
-
+$user_id = $_COOKIE['sessionid'];
 // Prepare SQL query
-$sql = "SELECT * FROM tasks WHERE 1";
+$sql = "SELECT * FROM tasks WHERE user_id != ?";
 
 if (!empty($locationFilter)) {
     $sql .= " AND location LIKE ?";
@@ -42,6 +42,7 @@ if (isset($params)) {
     $stmt->bind_param(str_repeat('s', count($params)), ...$params);
 }
 
+$stmt->bind_param("i" , $user_id);
 $stmt->execute();
 $result = $stmt->get_result();
 ?>
@@ -255,7 +256,8 @@ footer {
                         echo '<p><strong>Location:</strong> ' . htmlspecialchars($task['location']) . '</p>';
                         echo '<p><strong>Deadline:</strong> ' . htmlspecialchars($task['deadline']) . '</p>';
                         echo '<div class="task-actions">';
-                        echo '<a href="user_tasks.php?task_id=' . $task['id'] . '" class="apply-btn">Apply</a>';  // Updated link
+                        echo '<a href="user_tasks.php?doer_id=' . $_COOKIE['sessionid'] . '&task_id=' . $task['id'] . '" class="apply-btn">Apply</a>';
+ // Updated link
                         echo '</div>';
                         echo '</div>';
                     }
