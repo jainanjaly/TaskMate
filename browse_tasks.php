@@ -7,22 +7,33 @@ $paymentFilter = isset($_GET['payment']) ? floatval($_GET['payment']) : 0;
 $deadlineFilter = isset($_GET['deadline']) ? $_GET['deadline'] : '';
 $sortOption = isset($_GET['sort']) ? $_GET['sort'] : 'default';
 $user_id = $_COOKIE['sessionid'];
-// Prepare SQL query
-$sql = "SELECT * FROM tasks WHERE user_id != ?";
 
+// Prepare SQL query
+$sql = "SELECT * FROM tasks WHERE user_id != ?"; // Base query
+$params = [];
+$paramTypes = 'i'; // Start with 'i' for user_id (integer)
+
+$params[] = $user_id; // Add user_id to params array
+
+// Check for location filter
 if (!empty($locationFilter)) {
     $sql .= " AND location LIKE ?";
-    $params[] = '%' . $locationFilter . '%'; // Prepare parameter for binding
+    $params[] = '%' . $locationFilter . '%'; // Add location to params
+    $paramTypes .= 's'; // Add 's' for string type
 }
 
+// Check for payment filter
 if ($paymentFilter > 0) {
     $sql .= " AND payment >= ?";
-    $params[] = $paymentFilter; // Prepare parameter for binding
+    $params[] = $paymentFilter; // Add payment to params
+    $paramTypes .= 'd'; // Add 'd' for double type
 }
 
+// Check for deadline filter
 if (!empty($deadlineFilter)) {
     $sql .= " AND deadline <= ?";
-    $params[] = $deadlineFilter; // Prepare parameter for binding
+    $params[] = $deadlineFilter; // Add deadline to params
+    $paramTypes .= 's'; // Add 's' for string (date)
 }
 
 // Apply sorting
@@ -37,15 +48,13 @@ if ($sortOption == 'payment') {
 // Prepare statement
 $stmt = $conn->prepare($sql);
 
-// Bind parameters if any
-if (isset($params)) {
-    $stmt->bind_param(str_repeat('s', count($params)), ...$params);
-}
+// Bind all parameters dynamically in one call
+$stmt->bind_param($paramTypes, ...$params); // Single bind_param call
 
-$stmt->bind_param("i" , $user_id);
 $stmt->execute();
 $result = $stmt->get_result();
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
